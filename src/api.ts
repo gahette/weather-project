@@ -10,7 +10,7 @@ export const getWeather = async ({
     lon: number;
 }) => {
     const res = await fetch(
-        `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&units=metric&exclude=minutely,alerts&appid=${API_KEY}`,
+        `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&units=metric&exclude=minutely,alerts&lang=fr&appid=${API_KEY}`,
     );
     const data = await res.json();
     return WeatherSchema.parse(data);
