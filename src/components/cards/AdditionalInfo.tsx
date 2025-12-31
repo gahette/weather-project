@@ -1,6 +1,7 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import Card from "./Card";
 import { getWeather } from "../../api";
+<<<<<<< Updated upstream
 import Sunrise from "../../assets/sunrise.svg?react";
 import Sunset from "../../assets/sunset.svg?react";
 import Cloud from "../../assets/cloud.svg?react";
@@ -8,13 +9,18 @@ import Wind from "../../assets/wind.svg?react";
 import Pressure from "../../assets/pressure.svg?react";
 import UV from "../../assets/uv.svg?react";
 import UpArrow from "../../assets/UpArrow.svg?react";
+=======
+import type { Coords } from "../../types";
+>>>>>>> Stashed changes
 
-type Props = {};
+type Props = {
+    coords: Coords;
+};
 
-export default function AdditionalInfo({}: Props) {
+export default function AdditionalInfo({ coords }: Props) {
     const { data } = useSuspenseQuery({
-        queryKey: ["weather"],
-        queryFn: () => getWeather({ lat: 48.1436, lon: 0.1622 }),
+        queryKey: ["weather", coords],
+        queryFn: () => getWeather({ lat: coords.lat, lon: coords.lon }),
     });
 
     if (!data) return null;
