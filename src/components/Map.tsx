@@ -11,8 +11,9 @@ export default function Map({ coords, onMapClick }: Props) {
     const { lat, lon } = coords;
     return (
         <MapContainer
+            key={`${coords.lat},${coords.lon}`}
             center={[lat, lon]}
-            zoom={13}
+            zoom={5}
             style={{ width: "100%", height: "500px" }}
         >
             <MapClick onMapClick={onMapClick} />

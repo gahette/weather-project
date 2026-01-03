@@ -5,15 +5,38 @@ import AdditionalInfo from "./components/cards/AdditionalInfo";
 import Map from "./components/Map";
 import { useState } from "react";
 import type { Coords } from "./types";
+import LocationDropdown from "./components/dropdowns/LocationDropdown";
+import { useQuery } from "@tanstack/react-query";
+import { getGeocode } from "./api";
 
 function App() {
-    const [coords, setCoords] = useState<Coords>({ lat: 48.1436, lon: 0.1622 });
+    const [coordinates, setCoords] = useState<Coords>({
+        lat: 48.1436,
+        lon: 0.1622,
+    });
+    const [location, setLocation] = useState("Paris");
+
+    const { data: geocodeData } = useQuery({
+        queryKey: ["geocode", location],
+        queryFn: () => getGeocode(location),
+    });
 
     const onMapClick = (lat: number, lon: number) => {
         setCoords({ lat, lon });
+        setLocation("custom");
     };
+
+    const coords =
+        location === "custom"
+            ? coordinates
+            : {
+                  lat: geocodeData?.[0].lat ?? coordinates.lat,
+                  lon: geocodeData?.[0].lon ?? coordinates.lon,
+              };
+
     return (
         <div className="flex flex-col gap-8">
+            <LocationDropdown location={location} setLocation={setLocation} />
             <Map coords={coords} onMapClick={onMapClick} />
             <CurrentWeather coords={coords} />
             <HourlyForecast coords={coords} />
