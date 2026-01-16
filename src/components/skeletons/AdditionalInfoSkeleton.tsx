@@ -1,13 +1,13 @@
-import Card from "../cards/Card";
-import { Skeleton } from "../ui/skeleton";
+import Card from '../cards/Card';
+import { Skeleton } from '../ui/skeleton';
 
-type Props = {};
+interface Props {}
 
 export default function AdditionalInfoSkeleton({}: Props) {
     return (
         <Card
             title="Informations météorologiques supplémentaires"
-            childrenClassName="flex flex-col gap-8"
+            childrenClassName="grid grid-cols-1 md:grid-cols-2 gap-8"
         >
             {Array.from({ length: 6 }).map((_, index) => (
                 <div className="flex justify-between" key={index}>

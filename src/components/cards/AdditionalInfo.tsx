@@ -1,14 +1,14 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
-import Card from "./Card";
-import { getWeather } from "../../api";
-import Sunrise from "../../assets/sunrise.svg?react";
-import Sunset from "../../assets/sunset.svg?react";
-import Cloud from "../../assets/cloud.svg?react";
-import Wind from "../../assets/wind.svg?react";
-import Pressure from "../../assets/pressure.svg?react";
-import UV from "../../assets/uv.svg?react";
-import UpArrow from "../../assets/UpArrow.svg?react";
-import type { Coords } from "../../types";
+import { useSuspenseQuery } from '@tanstack/react-query';
+import Card from './Card';
+import { getWeather } from '../../api';
+import Sunrise from '../../assets/sunrise.svg?react';
+import Sunset from '../../assets/sunset.svg?react';
+import Cloud from '../../assets/cloud.svg?react';
+import Wind from '../../assets/wind.svg?react';
+import Pressure from '../../assets/pressure.svg?react';
+import UV from '../../assets/uv.svg?react';
+import UpArrow from '../../assets/UpArrow.svg?react';
+import type { Coords } from '../../types';
 
 type Props = {
     coords: Coords;
@@ -16,7 +16,7 @@ type Props = {
 
 export default function AdditionalInfo({ coords }: Props) {
     const { data } = useSuspenseQuery({
-        queryKey: ["weather", coords],
+        queryKey: ['weather', coords],
         queryFn: () => getWeather({ lat: coords.lat, lon: coords.lon }),
     });
 
@@ -24,7 +24,7 @@ export default function AdditionalInfo({ coords }: Props) {
     return (
         <Card
             title="Informations météorologiques supplémentaires"
-            childrenClassName="flex flex-col gap-8"
+            childrenClassName="grid grid-cols-1 md:grid-cols-2 gap-8"
         >
             {rows.map(({ label, value, Icon }) => (
                 <div className="flex justify-between" key={value}>
@@ -45,13 +45,13 @@ export default function AdditionalInfo({ coords }: Props) {
 }
 
 function FormatComponent({ value, number }: { value: string; number: number }) {
-    if (value === "sunrise" || value === "sunset")
+    if (value === 'sunrise' || value === 'sunset')
         return new Date(number * 1000).toLocaleTimeString(undefined, {
-            hour: "2-digit",
-            minute: "2-digit",
+            hour: '2-digit',
+            minute: '2-digit',
         });
 
-    if (value === "wind_deg")
+    if (value === 'wind_deg')
         return (
             <UpArrow
                 className="size-8 invert"
@@ -64,33 +64,33 @@ function FormatComponent({ value, number }: { value: string; number: number }) {
 
 const rows = [
     {
-        label: "Nébulosité (%)",
-        value: "clouds",
+        label: 'Nébulosité (%)',
+        value: 'clouds',
         Icon: Cloud,
     },
     {
-        label: "Indice UV",
-        value: "uvi",
+        label: 'Indice UV',
+        value: 'uvi',
         Icon: UV,
     },
     {
-        label: "Direction du vent",
-        value: "wind_deg",
+        label: 'Direction du vent',
+        value: 'wind_deg',
         Icon: Wind,
     },
     {
-        label: "Pression atmosphérique",
-        value: "pressure",
+        label: 'Pression atmosphérique',
+        value: 'pressure',
         Icon: Pressure,
     },
     {
-        label: "Lever du soleil",
-        value: "sunrise",
+        label: 'Lever du soleil',
+        value: 'sunrise',
         Icon: Sunrise,
     },
     {
-        label: "Coucher du soleil",
-        value: "sunset",
+        label: 'Coucher du soleil',
+        value: 'sunset',
         Icon: Sunset,
     },
 ] as const;

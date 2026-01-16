@@ -1,8 +1,8 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
-import { getWeather } from "../../api";
-import Card from "./Card";
-import WeatherIcon from "../../WeatherIcon";
-import type { Coords } from "../../types";
+import { useSuspenseQuery } from '@tanstack/react-query';
+import { getWeather } from '../../api';
+import Card from './Card';
+import WeatherIcon from '../../WeatherIcon';
+import type { Coords } from '../../types';
 
 type Props = {
     coords: Coords;
@@ -10,7 +10,7 @@ type Props = {
 
 export default function CurrentWeather({ coords }: Props) {
     const { data } = useSuspenseQuery({
-        queryKey: ["weather", coords],
+        queryKey: ['weather', coords],
         queryFn: () => getWeather({ lat: coords.lat, lon: coords.lon }),
     });
 
@@ -18,7 +18,8 @@ export default function CurrentWeather({ coords }: Props) {
     return (
         <Card
             title="Current Weather"
-            childrenClassName="flex flex-col items-center gap-6"
+            className="md:pb-11"
+            childrenClassName="flex flex-col items-center gap-6 2xl:justify-between"
         >
             <div className="flex flex-col items-center gap-2">
                 <h2 className="text-center text-6xl font-semibold">
@@ -35,10 +36,10 @@ export default function CurrentWeather({ coords }: Props) {
             <div className="flex flex-col gap-2">
                 <p className="text-center text-xl">Heure Local:</p>
                 <h3 className="text-4xl font-semibold">
-                    {new Intl.DateTimeFormat("fr-FR", {
+                    {new Intl.DateTimeFormat('fr-FR', {
                         timeZone: data.timezone,
-                        hour: "2-digit",
-                        minute: "2-digit",
+                        hour: '2-digit',
+                        minute: '2-digit',
                     }).format(new Date(data.current.dt * 1000))}
                 </h3>
             </div>

@@ -1,8 +1,8 @@
-import { MapContainer, Marker, TileLayer, useMap } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
-import type { Coords } from "../types";
-import { useEffect } from "react";
-import { MaptilerLayer } from "@maptiler/leaflet-maptilersdk";
+import { MapContainer, Marker, TileLayer, useMap } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
+import type { Coords } from '../types';
+import { useEffect } from 'react';
+import { MaptilerLayer } from '@maptiler/leaflet-maptilersdk';
 
 const API_KEY = import.meta.env.VITE_API_KEY;
 const MAPTILER_API_KEY = import.meta.env.VITE_MAPTILER_API_KEY;
@@ -19,7 +19,7 @@ export default function Map({ coords, onMapClick, mapType }: Props) {
         <MapContainer
             center={[lat, lon]}
             zoom={5}
-            style={{ width: "100%", height: "500px" }}
+            style={{ width: '100%', height: '100%' }}
         >
             <MapClick onMapClick={onMapClick} coords={coords} />
             <MapTileLayer />
@@ -42,7 +42,7 @@ function MapClick({
     const map = useMap();
 
     map.panTo([coords.lat, coords.lon]);
-    map.on("click", (e) => {
+    map.on('click', (e) => {
         const { lat, lng } = e.latlng;
         onMapClick(lat, lng);
     });
@@ -54,7 +54,7 @@ function MapTileLayer() {
 
     useEffect(() => {
         const tileLayer = new MaptilerLayer({
-            style: "basic-dark",
+            style: 'basic-dark',
             apiKey: MAPTILER_API_KEY,
         });
 
