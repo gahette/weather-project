@@ -8,7 +8,6 @@ import clsx from 'clsx';
 import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip';
 import Information from '/src/assets/information.svg?react';
 import Chevron from '/src/assets/chevronLeft.svg?react';
-import Hamburger from '/src/assets/hamburger.svg?react';
 import SidePanelSkeleton from './skeletons/SidePanelSkeleton';
 
 type Props = {
@@ -22,12 +21,12 @@ export default function SidePanel(props: Props) {
     return (
         <div
             className={clsx(
-                'bg-sidebar fixed top-0 right-0 z-1001 h-screen w-90 overflow-y-scroll px-4 py-8 shadow-md transition-transform duration-300',
+                'bg-sidebar fixed top-0 right-0 z-1001 h-screen w-(--sidebar-width) overflow-y-scroll px-4 py-8 shadow-md transition-transform duration-300 lg:translate-x-0!',
                 isSidePanelOpen ? 'translate-x-0' : 'translate-x-full',
             )}
         >
             <button onClick={() => setIsSidePanelOpen(false)}>
-                <Chevron className="-ml-2 size-8 invert" />
+                <Chevron className="-ml-2 size-8 invert lg:hidden" />
             </button>
             <Suspense fallback={<SidePanelSkeleton />}>
                 <AirPollution {...props} />

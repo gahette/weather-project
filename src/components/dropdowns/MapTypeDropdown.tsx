@@ -1,11 +1,11 @@
-import type { Dispatch, SetStateAction } from "react";
+import type { Dispatch, SetStateAction } from 'react';
 import {
     Select,
     SelectContent,
     SelectItem,
     SelectTrigger,
     SelectValue,
-} from "../ui/select";
+} from '../ui/select';
 
 type Props = {
     mapType: string;
@@ -15,13 +15,13 @@ type Props = {
 export default function MapTypeDropdown({ mapType, setMapType }: Props) {
     return (
         <Select value={mapType} onValueChange={(value) => setMapType(value)}>
-            <SelectTrigger className="w-[180px]">
+            <SelectTrigger className="xs:w-45 w-full">
                 <SelectValue placeholder="Theme" />
             </SelectTrigger>
             <SelectContent className="z-1001">
                 {types.map((city) => (
                     <SelectItem key={city} value={city} className="capitalize">
-                        {city.split("_")[0]}
+                        {city.split('_')[0]}
                     </SelectItem>
                 ))}
             </SelectContent>
@@ -30,10 +30,10 @@ export default function MapTypeDropdown({ mapType, setMapType }: Props) {
 }
 
 const types = [
-    "clouds_new",
-    "snow_new",
-    "precipitation_new",
-    "pressure_new",
-    "wind_new",
-    "temp_new",
+    'clouds_new',
+    'snow_new',
+    'precipitation_new',
+    'pressure_new',
+    'wind_new',
+    'temp_new',
 ] as const;

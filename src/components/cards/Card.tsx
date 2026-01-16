@@ -1,30 +1,35 @@
-import clsx from "clsx";
-import { type ReactNode } from "react";
+import clsx from 'clsx';
+import { type ReactNode } from 'react';
 
 type Props = {
-	children: ReactNode;
-	title?: string;
-	className?: string;
-	childrenClassName?: string;
+    children: ReactNode;
+    title?: string;
+    className?: string;
+    childrenClassName?: string;
 };
 
 export default function Card({
-	children,
-	title,
-	className,
-	childrenClassName,
+    children,
+    title,
+    className,
+    childrenClassName,
 }: Props) {
-	return (
-		<div className={clsx("flex flex-col gap-4 rounded-xl bg-linear-to-br from-card to-card/60 p-4 shadow-md", className)}>
-			<h2 className="text-2xl font-semibold">{title}</h2>
-			<div
-				className={clsx(
-					childrenClassName,
-					"animate-[fade-in_1s_ease-out-forwards]",
-				)}
-			>
-				{children}
-			</div>
-		</div>
-	);
+    return (
+        <div
+            className={clsx(
+                'from-card to-card/60 flex flex-col gap-4 rounded-xl bg-linear-to-br p-4 shadow-md 2xl:h-full',
+                className,
+            )}
+        >
+            <h2 className="text-2xl font-semibold">{title}</h2>
+            <div
+                className={clsx(
+                    childrenClassName,
+                    'animate-[fade-in_1s_ease-out-forwards] 2xl:flex-1',
+                )}
+            >
+                {children}
+            </div>
+        </div>
+    );
 }
